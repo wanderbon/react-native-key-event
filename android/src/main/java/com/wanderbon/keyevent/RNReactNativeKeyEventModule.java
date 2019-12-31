@@ -16,48 +16,32 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule implements KeyListener {
+import javax.net.ssl.KeyManager;
+
+public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
 
   public RNReactNativeKeyEventModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
+
+    View mView = new View(reactContext);
+
+    mView.setOnKeyListener(new View.OnKeyListener() {
+
+      @Override
+      public boolean onKey(View v, int keyCode, KeyEvent event) {
+        Log.i("onKey", keyCode + " | " + event.getDisplayLabel());
+        sendeKeyEvent("onKey", keyCode, event);
+        return false;
+      }
+    });
   }
 
   @Override
   public String getName() {
     return "RNReactNativeKeyEvent";
-  }
-
-  @Override
-  public int getInputType() {
-    return 0;
-  }
-
-  @Override
-  public boolean onKeyDown(View view, Editable text, int keyCode, KeyEvent event) {
-    Log.i("onKeyDown", keyCode + " | " + event.getDisplayLabel());
-    sendeKeyEvent("onKeyDown", keyCode, event);
-    return false;
-  }
-
-  @Override
-  public boolean onKeyUp(View view, Editable text, int keyCode, KeyEvent event) {
-    Log.i("onKeyUp", keyCode + " | " + event.getDisplayLabel());
-    sendeKeyEvent("onKeyUp", keyCode, event);
-    return false;
-  }
-
-  @Override
-  public boolean onKeyOther(View view, Editable text, KeyEvent event) {
-    Log.i("onKeyUp", event.getKeyCode() + " | " + event.getDisplayLabel());
-    return false;
-  }
-
-  @Override
-  public void clearMetaKeyState(View view, Editable content, int states) {
-
   }
 
   private void sendeKeyEvent(String eventName, int keyCode, KeyEvent event) {
