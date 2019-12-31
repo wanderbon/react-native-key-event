@@ -71,19 +71,4 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
             .emit(eventName, params);
   }
-
-  @Override
-  public void addView(View view, ViewGroup.LayoutParams params) {
-
-  }
-
-  @Override
-  public void updateViewLayout(View view, ViewGroup.LayoutParams params) {
-
-  }
-
-  @Override
-  public void removeView(View view) {
-
-  }
 }
