@@ -5,7 +5,10 @@ import android.text.Editable;
 import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewManager;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -37,6 +40,14 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
         return false;
       }
     });
+
+    mView.setOnTouchListener(new View.OnTouchListener() {
+      @Override
+      public boolean onTouch(View v, MotionEvent event) {
+        Log.i("onKey_onTouch", event.getAction() + "");
+        return false;
+      }
+    });
   }
 
   @Override
@@ -59,5 +70,20 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
     reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
             .emit(eventName, params);
+  }
+
+  @Override
+  public void addView(View view, ViewGroup.LayoutParams params) {
+
+  }
+
+  @Override
+  public void updateViewLayout(View view, ViewGroup.LayoutParams params) {
+
+  }
+
+  @Override
+  public void removeView(View view) {
+
   }
 }
