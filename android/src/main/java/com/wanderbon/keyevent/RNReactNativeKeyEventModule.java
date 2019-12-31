@@ -3,6 +3,7 @@ package com.wanderbon.keyevent;
 
 import android.text.Editable;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -36,18 +37,21 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule impl
 
   @Override
   public boolean onKeyDown(View view, Editable text, int keyCode, KeyEvent event) {
+    Log.i("onKeyDown", keyCode + " | " + event.getDisplayLabel());
     sendeKeyEvent("onKeyDown", keyCode, event);
     return false;
   }
 
   @Override
   public boolean onKeyUp(View view, Editable text, int keyCode, KeyEvent event) {
+    Log.i("onKeyUp", keyCode + " | " + event.getDisplayLabel());
     sendeKeyEvent("onKeyUp", keyCode, event);
     return false;
   }
 
   @Override
   public boolean onKeyOther(View view, Editable text, KeyEvent event) {
+    Log.i("onKeyUp", event.getKeyCode() + " | " + event.getDisplayLabel());
     return false;
   }
 
