@@ -21,7 +21,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import javax.net.ssl.KeyManager;
 
-public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule implements View.OnKeyListener {
+public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule implements View.OnTouchListener {
 
   private final ReactApplicationContext reactContext;
 
@@ -73,9 +73,8 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule impl
   }
 
   @Override
-  public boolean onKey(View v, int keyCode, KeyEvent event) {
-    Log.i("onKey_ovveride", keyCode + " | " + event.getDisplayLabel());
-    sendeKeyEvent("onKey", keyCode, event);
+  public boolean onTouch(View v, MotionEvent event) {
+    Log.i("onKey_override", event.getAction() + "");
     return false;
   }
 }
