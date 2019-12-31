@@ -21,7 +21,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import javax.net.ssl.KeyManager;
 
-public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
+public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule implements View.OnKeyListener {
 
   private final ReactApplicationContext reactContext;
 
@@ -70,5 +70,12 @@ public class RNReactNativeKeyEventModule extends ReactContextBaseJavaModule {
     reactContext
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
             .emit(eventName, params);
+  }
+
+  @Override
+  public boolean onKey(View v, int keyCode, KeyEvent event) {
+    Log.i("onKey_ovveride", keyCode + " | " + event.getDisplayLabel());
+    sendeKeyEvent("onKey", keyCode, event);
+    return false;
   }
 }
