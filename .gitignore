@@ -104,6 +104,7 @@ dist
 .tern-port
 
 /android/.idea/
+/android/.classpath
 .DS_Store
 # Built application files
 *.apk
